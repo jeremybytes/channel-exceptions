@@ -36,8 +36,8 @@ public class Program
         {
             for (int i = 0; i < 20; i++)
             {
-                MightThrowExceptionForProducer(i);
                 Console.WriteLine($"Producing something: {i}");
+                MightThrowExceptionForProducer(i);
                 await Task.Delay(10);
                 await writer.WriteAsync(i);
             }
@@ -52,8 +52,8 @@ public class Program
     {
         await foreach (var item in reader.ReadAllAsync())
         {
-            MightThrowExceptionForConsumer(item);
             Console.WriteLine($"Consuming object: {item}");
+            MightThrowExceptionForConsumer(item);
         }
     }
 

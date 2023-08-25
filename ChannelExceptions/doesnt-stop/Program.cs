@@ -39,8 +39,8 @@ public class Program
         {
             try
             {
-                MightThrowExceptionForProducer(i);
                 Console.WriteLine($"Producing something: {i}");
+                MightThrowExceptionForProducer(i);
                 await Task.Delay(10);
                 TotalProduced++;
                 await writer.WriteAsync(i);
@@ -60,8 +60,8 @@ public class Program
         {
             try
             {
-                MightThrowExceptionForConsumer(item);
                 Console.WriteLine($"Consuming object: {item}");
+                MightThrowExceptionForConsumer(item);
                 TotalConsumed++;
             }
             catch (Exception ex)
