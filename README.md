@@ -38,20 +38,20 @@ This code uses try/catch blocks inside the loops of the producer and consumer. T
 [original-code/Program.cs](./ChannelExceptions/original-code/Program.cs)  
 
 Relevant code:
-```c#
+```csharp
 var channel = Channel.CreateBounded<object>(new BoundedChannelOptions(10));
 ```
-```c#
+```csharp
 await channel.Writer.WriteAsync(i);
 ```
 The bounded channel limits the channel to only holding 10 items. When the channel is full, calls to "await WriteAsync()" will wait until there is space available in the channel.  
 
-```c#
+```csharp
 await Task.WhenAll(Producer(), Consumer());
 ```
 The "await WhenAll()" will wait until both the Producer task and the Consumer task have completed. Since the Producer ends up waiting indefinitely when the channel is full, the application will hang on this line.
 
-```c#
+```csharp
 finally
 {
    channel.Writer.Complete();
@@ -134,20 +134,20 @@ The producer task finishes when the exception is thrown. Since the producer mark
 [refactored/Program.cs](./ChannelExceptions/refactored/Program.cs)  
 
 Relevant code:
-```c#
+```csharp
 var channel = Channel.CreateBounded<int>(new BoundedChannelOptions(10));
 ```
-```c#
+```csharp
 await writer.WriteAsync(i);
 ```
 The bounded channel limits the channel to only holding 10 items. When the channel is full, calls to "await WriteAsync()" will wait until there is space available in the channel.  
 
-```c#
+```csharp
 await Task.WhenAll(producer, consumer);
 ```
 The "await WhenAll()" will wait until both the Producer task and the Consumer task have completed. Since the Producer ends up waiting indefinitely when the channel is full, the application will hang on this line.
 
-```c#
+```csharp
 finally
 {
    writer.Complete();
@@ -255,7 +255,7 @@ The producer task finishes when the exception is thrown. Since the producer mark
 [separate-await/Program.cs](./ChannelExceptions/separate-await/Program.cs)  
 
 Relevant code:
-```c#
+```csharp
 await consumer;
 await producer;
 
@@ -358,13 +358,13 @@ Done
 
 Relevant code:
 
-```c#
+```csharp
 var channel = Channel.CreateUnbounded<int>();
 ```
 
 The channel is no longer restricted to 10 items.  
 
-```c#
+```csharp
 await Task.WhenAll(producer, consumer);
 ```
 
@@ -475,7 +475,7 @@ Done
 Relevant code:
 
 **Producer**
-```c#
+```csharp
 for (int i = 0; i < 100; i++)
 {
    try
@@ -498,7 +498,7 @@ writer.Complete();
 The producer has a "catch" inside the for loop. This will allow the processing to continue even when an individual item throws an exception. When the entire producer process is done, the channel is marked as "Complete".  
 
 **Consumer**
-```c#
+```csharp
 await foreach (var item in reader.ReadAllAsync())
 {
    try
@@ -517,14 +517,14 @@ await foreach (var item in reader.ReadAllAsync())
 The consumer also has a try/catch block inside the foreach loop. If an individual item throws an exception, processing continues. The foreach loop will exit once the channel is marked "Complete" and all of the items have been read off of the channel.
 
 **Producer Exceptions**
-```c#
+```csharp
 if (Randomizer.Next() % 3 == 0)
    throw new Exception($"Bad thing happened in Producer ({item})");
 ```
 The producer exceptions are randomized (approximaly 1 in 3 items should fail).  
 
 **Consumer Exceptions**
-```c#
+```csharp
 if (Randomizer.Next() % 50 == 0)
    throw new Exception($"Bad thing happened in Consumer ({item})");
 ```
