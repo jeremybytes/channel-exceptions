@@ -34,10 +34,10 @@ public class Program
     {
         try
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 20; i++)
             {
-                MightThrowExceptionForProducer();
-                Console.WriteLine($"Producing something");
+                MightThrowExceptionForProducer(i);
+                Console.WriteLine($"Producing something: {i}");
                 await Task.Delay(10);
                 await writer.WriteAsync(i);
             }
@@ -52,18 +52,18 @@ public class Program
     {
         await foreach (var item in reader.ReadAllAsync())
         {
-            MightThrowExceptionForConsumer();
+            MightThrowExceptionForConsumer(item);
             Console.WriteLine($"Consuming object: {item}");
         }
     }
 
-    private static void MightThrowExceptionForProducer()
+    private static void MightThrowExceptionForProducer(int item)
     {
-        //throw new Exception("Bad thing happened in Producer");
+        //throw new Exception($"Bad thing happened in Producer ({item})");
     }
 
-    private static void MightThrowExceptionForConsumer()
+    private static void MightThrowExceptionForConsumer(int item)
     {
-        throw new Exception("Bad thing happened in Consumer");
+        throw new Exception($"Bad thing happened in Consumer ({item})");
     }
 }

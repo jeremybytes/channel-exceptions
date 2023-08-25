@@ -3,6 +3,8 @@
 public class Program
 {
     private static Random Randomizer { get; } = new Random();
+    private static int TotalProduced = 0;
+    private static int TotalConsumed = 0;
 
     static async Task Main(string[] args)
     {
@@ -15,6 +17,8 @@ public class Program
             Console.WriteLine(ex.Message);
         }
 
+        Console.WriteLine($"Total Produced: {TotalProduced}");
+        Console.WriteLine($"Total Consumed: {TotalConsumed}");
         Console.WriteLine("Done");
         Console.ReadLine();
     }
@@ -31,13 +35,14 @@ public class Program
 
     static async Task Producer(ChannelWriter<int> writer)
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 100; i++)
         {
             try
             {
-                MightThrowExceptionForProducer();
-                Console.WriteLine($"Producing something");
+                MightThrowExceptionForProducer(i);
+                Console.WriteLine($"Producing something: {i}");
                 await Task.Delay(10);
+                TotalProduced++;
                 await writer.WriteAsync(i);
             }
             catch (Exception ex)
@@ -55,8 +60,9 @@ public class Program
         {
             try
             {
-                MightThrowExceptionForConsumer();
+                MightThrowExceptionForConsumer(item);
                 Console.WriteLine($"Consuming object: {item}");
+                TotalConsumed++;
             }
             catch (Exception ex)
             {
@@ -65,15 +71,15 @@ public class Program
         }
     }
 
-    private static void MightThrowExceptionForProducer()
+    private static void MightThrowExceptionForProducer(int item)
     {
-        if (Randomizer.Next(11) % 3 == 0)
-            throw new Exception("Bad thing happened in Producer");
+        if (Randomizer.Next() % 3 == 0)
+            throw new Exception($"Bad thing happened in Producer ({item})");
     }
 
-    private static void MightThrowExceptionForConsumer()
+    private static void MightThrowExceptionForConsumer(int item)
     {
-        if (Randomizer.Next(6) % 3 == 0)
-            throw new Exception("Bad thing happened in Consumer");
+        if (Randomizer.Next() % 50 == 0)
+            throw new Exception($"Bad thing happened in Consumer ({item})");
     }
 }

@@ -49,12 +49,12 @@ public class Program
     private static void DoSomethingThatMightThrowExceptionForConsumer(object o)
     {
         Console.WriteLine($"Consuming object: {o}");
-        //throw new Exception("Bad thing happened in Consumer");
+        throw new Exception("Bad thing happened in Consumer");
     }
 
     private static void DoSomethingThatMightThrowExceptionForProducer()
     {
         Console.WriteLine($"Producing something");
-        throw new Exception("Bad thing happened in Producer");
+        //throw new Exception("Bad thing happened in Producer");
     }
 }
