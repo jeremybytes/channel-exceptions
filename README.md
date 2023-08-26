@@ -34,6 +34,12 @@ This code uses try/catch blocks inside the loops of the producer and consumer. T
 
 ## Behavior & Analysis
 
+* [original-code](#original-code)  
+* [refactored](#refactored)  
+* [separate-await](#separate-await)
+* [unbounded-channe](#unbounded-channel)  
+* [doesnt-stop](#doesnt-stop)  
+
 ### original-code
 [original-code/Program.cs](./ChannelExceptions/original-code/Program.cs)  
 
