@@ -34,6 +34,8 @@ This code uses try/catch blocks inside the loops of the producer and consumer. T
 
 ## Behavior & Analysis
 
+The following sections describe the behavior of each project. The source code is set so that the consumer throws an exception and the producer does not. Comment/uncomment the exception sections to reproduce the results shown. You can jump to a particular projeced using the links below.
+
 * [original-code](#original-code)  
 * [refactored](#refactored)  
 * [separate-await](#separate-await)
