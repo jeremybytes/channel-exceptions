@@ -14,7 +14,6 @@ public class Program
         }
 
         Console.WriteLine("Done");
-        Console.ReadLine();
     }
 
     static async Task ProducerConsumerWithExceptions()

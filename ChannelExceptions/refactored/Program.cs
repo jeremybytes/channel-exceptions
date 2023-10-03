@@ -14,12 +14,12 @@ public class Program
         }
 
         Console.WriteLine("Done");
-        Console.ReadLine();
     }
 
     static async Task ProducerConsumerWithExceptions()
     {
-        var channel = Channel.CreateBounded<int>(new BoundedChannelOptions(10));
+        var channel = 
+            Channel.CreateBounded<int>(new BoundedChannelOptions(10));
 
         Task producer = Producer(channel.Writer);
         Task consumer = Consumer(channel.Reader);

@@ -20,7 +20,6 @@ public class Program
         Console.WriteLine($"Total Produced: {TotalProduced}");
         Console.WriteLine($"Total Consumed: {TotalConsumed}");
         Console.WriteLine("Done");
-        Console.ReadLine();
     }
 
     static async Task ProducerConsumerWithExceptions()

@@ -8,6 +8,9 @@ Exploring exception handling with C# channels. This came from a questions from s
 
 If you want more information on Channels, you can look at the code, slides, and articles that are part of the presentation mentioned above: [Better Parallel Code with C# Channels](https://github.com/jeremybytes/csharp-channels-presentation)
 
+## Articles
+* [Don't Use "Task.WhenAll" for Interdependent Tasks](https://jeremybytes.blogspot.com/2023/10/dont-use-taskwhenall-for-interdependent.html)
+
 ## Projects
 
 * **original-code**  
@@ -338,19 +341,9 @@ Producing something: 1
 Consuming object: 0
 Bad thing happened in Consumer (0)
 Done
-Producing something: 2
-Producing something: 3
-Producing something: 4
-Producing something: 5
-Producing something: 6
-Producing something: 7
-Producing something: 8
-Producing something: 9
-Producing something: 10
-Producing something: 11
 ```
  
-Even though the consumer throws an exception, the application completes (does not hang). Notice that the "Done" message is in the middle. Since the code "awaits" the consumer (which throws an exception), it does not "await" the producer. This means processing on the Main method continues (by printing "Done") without waiting for the producer to finish.
+Even though the consumer throws an exception, the application completes (does not hang). Since the code "awaits" the consumer (which throws an exception), it does not "await" the producer. This means processing on the Main method continues (by printing "Done") without waiting for the producer to finish.
 
 **Output with both Consumer/Producer exceptions**  
 All processing stops when the producer throws an exception on the first item.  

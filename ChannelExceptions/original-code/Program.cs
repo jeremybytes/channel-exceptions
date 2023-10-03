@@ -13,7 +13,6 @@ public class Program
         {
             Console.WriteLine(ex.ToString());
         }
-        Console.ReadLine();
     }
 
     static async Task ProducerConsumerWithExceptions()
