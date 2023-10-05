@@ -9,7 +9,8 @@ Exploring exception handling with C# channels. This came from a questions from s
 If you want more information on Channels, you can look at the code, slides, and articles that are part of the presentation mentioned above: [Better Parallel Code with C# Channels](https://github.com/jeremybytes/csharp-channels-presentation)
 
 ## Articles
-* [Don't Use "Task.WhenAll" for Interdependent Tasks](https://jeremybytes.blogspot.com/2023/10/dont-use-taskwhenall-for-interdependent.html)
+* [Don't Use "Task.WhenAll" for Interdependent Tasks](https://jeremybytes.blogspot.com/2023/10/dont-use-taskwhenall-for-interdependent.html)  
+* [Looking at Producer/Consumer Dependencies: Bounded vs. Unbounded Channels](https://jeremybytes.blogspot.com/2023/10/looking-at-producerconsumer.html)  
 
 ## Projects
 
