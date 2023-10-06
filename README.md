@@ -11,7 +11,7 @@ If you want more information on Channels, you can look at the code, slides, and 
 ## Articles
 * [Don't Use "Task.WhenAll" for Interdependent Tasks](https://jeremybytes.blogspot.com/2023/10/dont-use-taskwhenall-for-interdependent.html)  
 * [Looking at Producer/Consumer Dependencies: Bounded vs. Unbounded Channels](https://jeremybytes.blogspot.com/2023/10/looking-at-producerconsumer.html)  
-* Producer/Consumer Exception Handling - A More Reliable Approach *(coming 10/6/2023 01:00 p.m. PDT)*
+* [Producer/Consumer Exception Handling - A More Reliable Approach](https://jeremybytes.blogspot.com/2023/10/producerconsumer-exception-handling.html)  
 
 ## Projects
 
