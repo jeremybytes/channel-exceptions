@@ -37,6 +37,11 @@ This code uses an unbounded channel instead of a bounded channel. When the consu
 [doesnt-stop/Program.cs](./ChannelExceptions/doesnt-stop/Program.cs)  
 This code uses try/catch blocks inside the loops of the producer and consumer. This allows the process to continue even if individual operations fail. Exceptions are randomly thrown in both the producer and consumer and are "logged" to the console.  
 
+* **error-channel**  
+[error-channel/Program.cs](./ChannelExceptions/error-channel/Program.cs)  
+This code uses an additional channel for errors. If the consumer fails, it puts the item on the error channel for reprocessing. The consumer on the error channel tries to reprocess each item 3 times.
+
+
 ## Behavior & Analysis
 
 The following sections describe the behavior of each project. The source code is set so that the consumer throws an exception and the producer does not. Comment/uncomment the exception sections to reproduce the results shown. You can jump to a particular projeced using the links below.
@@ -46,6 +51,7 @@ The following sections describe the behavior of each project. The source code is
 * [separate-await](#separate-await)
 * [unbounded-channe](#unbounded-channel)  
 * [doesnt-stop](#doesnt-stop)  
+* [error-channel](#error-channel)  
 
 ### original-code
 [original-code/Program.cs](./ChannelExceptions/original-code/Program.cs)  
@@ -701,6 +707,64 @@ Total Produced: 77
 Total Consumed: 74
 Done
 ```
+
+### error-channel
+[error-channel/Program.cs](./ChannelExceptions/error-channel/Program.cs)  
+
+If the consumer fails, it puts the item onto a separate error channel. The processor of the error channel tries to reprocess each item 3 times. Retries and failures are logged to the console.
+
+*Full write-up with output coming soon.*  
+
+Relevant code: 
+
+**Consumer**
+```csharp
+try
+{
+   await foreach (var item in reader.ReadAllAsync())
+   {
+      try
+      {
+         Console.WriteLine($"Consuming object: {item}");
+         MightThrowExceptionForConsumer(item);
+         TotalConsumed++;
+      }
+         catch (Exception ex)
+      {
+         _ = errorWriter.WriteAsync(item);
+         Console.WriteLine($"Logged: {ex.Message}");
+      }
+   }
+}
+finally
+{
+   errorWriter.Complete();
+}
+```
+
+**Error Processor**  
+```csharp
+await foreach(var item in errorReader.ReadAllAsync())
+{
+   for (int iteration = 0; iteration < 3; iteration++)
+   {
+      try
+      {
+         Console.WriteLine($"Retrying object ({iteration}): {item}");
+         MightThrowExceptionForErrorProcessor(item);
+         TotalConsumed++;
+         break;
+      }
+      catch (Exception ex)
+      {
+         Console.WriteLine($"Logged ({iteration}): {ex.Message}");
+         if (iteration == 2) // failed on last chance
+            Console.WriteLine($"Logged ({iteration}): Failed to processes item");
+      }
+   }
+}
+```
+
 ---
 ## More to Come
 This is an initial write-up and work in progress. A full article is in the works.

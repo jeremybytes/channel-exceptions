@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-DoesntStop", "4-DoesntSto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "refactored", "refactored\refactored.csproj", "{53478A3A-F196-4DF1-9622-627E54B5E1AB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-ErrorChannel", "5-ErrorChannel", "{41D23397-5E0E-43EF-AA8C-4E7690FFF465}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "error-channel", "error-channel\error-channel.csproj", "{3C1E0A23-E348-42DE-8199-DD58C1A4F698}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{53478A3A-F196-4DF1-9622-627E54B5E1AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53478A3A-F196-4DF1-9622-627E54B5E1AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53478A3A-F196-4DF1-9622-627E54B5E1AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1E0A23-E348-42DE-8199-DD58C1A4F698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1E0A23-E348-42DE-8199-DD58C1A4F698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1E0A23-E348-42DE-8199-DD58C1A4F698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1E0A23-E348-42DE-8199-DD58C1A4F698}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{C6D540AD-9587-4E48-A534-4121C699A90F} = {CE538611-B2F9-4763-8AFE-A5641BE0C12B}
 		{7E346DED-7BC4-44EF-8C7D-0228E22103E9} = {9C99E5CD-5FF5-4F12-854C-D2021C9AA056}
 		{53478A3A-F196-4DF1-9622-627E54B5E1AB} = {7EFF8287-6865-4D2B-AB3E-6D80FB0C2EC7}
+		{3C1E0A23-E348-42DE-8199-DD58C1A4F698} = {41D23397-5E0E-43EF-AA8C-4E7690FFF465}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47E40101-3479-4485-BB6B-7F876A1EAD4D}
