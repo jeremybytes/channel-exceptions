@@ -1,4 +1,5 @@
-﻿using System.Threading.Channels;
+﻿using System.Threading;
+using System.Threading.Channels;
 
 public class Program
 {
@@ -43,7 +44,7 @@ public class Program
                 Console.WriteLine($"Producing something: {i}");
                 MightThrowExceptionForProducer(i);
                 await Task.Delay(10);
-                TotalProduced++;
+                Interlocked.Increment(ref TotalProduced);
                 await writer.WriteAsync(i);
             }
             catch (Exception ex)
@@ -65,7 +66,7 @@ public class Program
                 {
                     Console.WriteLine($"Consuming object: {item}");
                     MightThrowExceptionForConsumer(item);
-                    TotalConsumed++;
+                    Interlocked.Increment(ref TotalConsumed);
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +91,7 @@ public class Program
                 {
                     Console.WriteLine($"Retrying object ({iteration}): {item}");
                     MightThrowExceptionForErrorProcessor(item);
-                    TotalConsumed++;
+                    Interlocked.Increment(ref TotalConsumed);
                     break;
                 }
                 catch (Exception ex)

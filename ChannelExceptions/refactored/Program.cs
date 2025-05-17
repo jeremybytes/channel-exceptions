@@ -18,8 +18,9 @@ public class Program
 
     static async Task ProducerConsumerWithExceptions()
     {
-        var channel = 
+        var channel =
             Channel.CreateBounded<int>(new BoundedChannelOptions(10));
+            //Channel.CreateUnbounded<int>();
 
         Task producer = Producer(channel.Writer);
         Task consumer = Consumer(channel.Reader);
